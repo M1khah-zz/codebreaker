@@ -13,7 +13,7 @@ module Codebreaker
       puts 'Try to guess 4 numbers in range from 1 to 6'
 
       while @attempts != 0
-          guess = STDIN.gets.chomp
+          guess = gets.chomp
 
           case guess
             when 'hint'

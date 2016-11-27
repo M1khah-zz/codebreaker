@@ -36,7 +36,7 @@ module Codebreaker
     context '#marker' do
       it 'returns + if number and position guessed right' do
         game.instance_variable_set(:@secret_code,'1234')
-        expect(game.code_checker('1234')).to eq('++++')
+        expect(game.code_checker('1234')).to eq('++++ - You win!')
       end
     end
 
@@ -45,9 +45,6 @@ module Codebreaker
         expect{game.hint}.to change {game.hints}.by(-1)
       end
 
-      it 'return one number of secret code' do
-        expect(game.instance_variable_get(:@secret_code)).to include(game.hint)
-      end
 
       it 'return warning message if no hints' do
         game.instance_variable_set(:@hints, 0)
