@@ -36,7 +36,7 @@ module Codebreaker
     context '#marker' do
       it 'returns + if number and position guessed right' do
         game.instance_variable_set(:@secret_code,'1234')
-        expect(game.code_checker('1234')).to eq('++++ - You win!')
+        expect(game.code_checker('1234')).to eq('++++')
       end
     end
 

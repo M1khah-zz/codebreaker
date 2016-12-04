@@ -10,11 +10,10 @@ module Codebreaker
         @hints = HINTS
     end
 
-
     def code_checker(guess)
       return 'Game over' if @attempts == 0
       @attempts -= 1
-      return '++++ - You win!' if guess == @secret_code
+      return '++++' if guess == @secret_code
       marker(@secret_code.chars, guess.chars)
     end
 
@@ -24,6 +23,13 @@ module Codebreaker
       @hints -= 1
     end
 
+    def to_h
+      {
+        :secret_code => @secret_code,
+        :attempts_left => @attempts,
+        :hints_left => @hints,
+      }
+    end
 
     private
 
@@ -34,11 +40,11 @@ module Codebreaker
 
     def marker(code, guess)
       guess.each do |number|
-        puts "-" if code.include?(number)
+        print "-" if code.include?(number)
       end
 
       guess.each_with_index do |number,index|
-        puts "+" if code[index] == number[index]
+        print "+" if code[index] == number[index]
       end
     end
   end
