@@ -35,8 +35,8 @@ module Codebreaker
 
     def save
       puts 'Would you like to save the game?(y/n)'
-      save_data if gets.chomp.downcase == 'y'
-      return if gets.chomp.downcase != 'y'
+      save_data if gets.chomp.downcase! == 'y'
+      return if gets.chomp.downcase! != 'y'
     end
 
     def save_data
@@ -49,7 +49,7 @@ module Codebreaker
     def get_score
       score = @game.to_h
       puts 'What is your name?'
-      score[:name] = gets.chomp.capitalize
+      score[:name] = gets.chomp.capitalize!
       stat = YAML.load_file('data.yaml') || []
       stat << score
     end

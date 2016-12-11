@@ -35,17 +35,26 @@ module Codebreaker
 
     def code_generator
       code = Array.new(4)
-      code.map { |element| rand(1..6) }.join
+      code.map { |e| rand(1..6) }.join
     end
 
     def marker(code, guess)
-      guess.each do |number|
-        print "-" if code.include?(number)
+      result = ''
+      guess.map.with_index do |number, index|
+        if number == code[index]
+          code[index], guess[index] = nil
+          result << '+'
+        end
       end
 
-      guess.each_with_index do |number,index|
-        print "+" if code[index] == number[index]
+      [code, guess].each(&:compact!)
+      code.each do |number|
+        if guess.include?(number)
+          guess[guess.index(number)] = nil
+          result << '-'
+        end
       end
+      result
     end
   end
 end

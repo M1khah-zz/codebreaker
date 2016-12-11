@@ -23,6 +23,30 @@ module Codebreaker
     end
 
     context '#code_checker' do
+      array_of_answers = [
+        ['1111', '1111', '++++'],
+        ['1234', '4321', '----'],
+        ['2363', '2366', '+++'],
+        ['1234', '2345', '---'],
+        ['3635', '3333', '++'],
+        ['1234', '5513', '--'],
+        ['1234', '5535', '+'],
+        ['1234', '5525', '-'],
+        ['1234', '4213', '+---'],
+        ['1234', '2134', '++--'],
+        ['1234', '5134', '++-'],
+        ['1234', '5213', '+--'],
+        ['1234', '1546', '+-'],
+        ['1234', '5555', '']
+      ]
+
+      array_of_answers.each do |item|
+         it "should return #{item[2]} if secret_code is #{item[0]} and player_code is #{item[1]}" do
+           game.instance_variable_set(:@secret_code, item[0])
+           expect(game.code_checker(item[1])).to eq item[2]
+         end
+      end
+
       it 'reduce attempts amount by 1' do
         expect{game.code_checker('1234')}.to change{game.attempts}.by(-1)
       end
@@ -40,6 +64,7 @@ module Codebreaker
       end
     end
 
+
     context '#hint' do
       it 'reduce hints amount by 1' do
         expect{game.hint}.to change {game.hints}.by(-1)
@@ -51,5 +76,7 @@ module Codebreaker
         expect(game.hint).to eq("You dont have hints")
       end
     end
+
+
   end
 end
