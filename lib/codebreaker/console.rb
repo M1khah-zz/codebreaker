@@ -20,7 +20,8 @@ module Codebreaker
           return
       end
 
-      return if @attempts == 0
+      return 'Game over' if @attempts == 0
+      save
       play_again
     end
 
